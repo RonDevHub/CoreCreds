@@ -30,7 +30,7 @@ CoreCreds ist ein extrem leichtgewichtiger, datenschutzfreundlicher und hochsich
 Das Repository verfügt über einen integrierten GitHub-Worker, der fertige Images nach `ghcr.io/rondevhub/corecreds:latest` schiebt.
 
 1. Erstelle eine `docker-compose.yml` wie im Repository angegeben.
-2. Platziere deine Wortlisten (`dice-de.txt`, `dice-lat.txt`, `eff.txt`) im Ordner `./data/`.
+2. Platziere deine Wortlisten (`dice-de.txt`, `dice-la.txt`, `eff.txt`) im Ordner `./data/`.
 3. Starte den Container:
    ```bash
    docker compose up -d
