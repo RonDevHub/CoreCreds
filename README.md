@@ -42,6 +42,9 @@ Das Repository verfügt über einen integrierten GitHub-Worker, der fertige Imag
 2. Setze das Wurzelverzeichnis deiner Domain oder Subdomain direkt auf den Ordner `public/`.
 3. Platziere deine Wortlisten in den Ordner `data/`. Die mitgelieferte `.htaccess` sorgt automatisch für schöne URLs.
 
+## Wortlisten
+Gefunden auf <a href="https://theworld.com/~reinhold/diceware.html" target="_blank">theworld.com/~reinhold/diceware.html</a>
+
 ## Lizenz
 
 Freie Software – Open Source.
