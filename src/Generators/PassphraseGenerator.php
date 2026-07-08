@@ -100,7 +100,7 @@ class PassphraseGenerator
             if ($options['word_start_upper'] ?? false) {
                 $w = ucfirst($w);
             } elseif ($options['word_start_mix'] ?? false) {
-                $w = (CSRPNG::getInt(0, 1) === 1) ? ucfirst($w) : lcfirst($w);
+                $w = (CSPRNG::getInt(0, 1) === 1) ? ucfirst($w) : lcfirst($w);
             }
 
             if (in_array($idx, $numIndices)) {
