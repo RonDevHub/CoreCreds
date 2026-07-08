@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  corecreds:
+    image: ghcr.io/rondevhub/corecreds:latest
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    volumes:
+      - ./data:/var/www/html/data
