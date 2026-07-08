@@ -96,7 +96,7 @@ class PassphraseGenerator
             array_splice($indices, $idxKey, 1);
         }
 
-        $symbolsPool = '!@#$%&()+=[]{}|;:,<>?';
+        $symbolsPool = '!#$%&()+=[]{}|;:,<>?';
         foreach ($words as $idx => &$w) {
             if ($options['word_start_upper'] ?? false) {
                 $w = ucfirst($w);
