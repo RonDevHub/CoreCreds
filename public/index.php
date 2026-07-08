@@ -161,6 +161,14 @@ $router->add('GET', '', function() use ($translator) {
                                 <input type="text" x-model="usernameOpts.base_name" class="w-full p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 focus:outline-none focus:border-blue-600 transition" placeholder="z.B. Rocky">
                             </div>
                             <div>
+                                <label class="block text-sm font-bold mb-2"><?php echo $lang['username_case']; ?></label>
+                                <select x-model="usernameOpts.username_case" class="w-full p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 focus:outline-none focus:border-blue-600 transition">
+                                    <option value="default"><?php echo $lang['case_default']; ?></option>
+                                    <option value="upper"><?php echo $lang['case_upper']; ?></option>
+                                    <option value="lower"><?php echo $lang['case_lower']; ?></option>
+                                </select>
+                            </div>
+                            <div>
                                 <label class="block text-sm font-bold mb-2"><?php echo $lang['digit_count']; ?>: <span x-text="usernameOpts.digit_count" class="text-blue-600"></span></label>
                                 <input type="range" min="0" max="8" x-model="usernameOpts.digit_count" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600">
                             </div>
@@ -225,7 +233,7 @@ $router->add('GET', '', function() use ($translator) {
                     timer: null,
                     passwordOpts: { length: 16, uppercase: true, lowercase: true, numbers: true, symbols: true, exclude_similar: false },
                     passphraseOpts: { word_count: 5, wordlist: 'mix', word_start_upper: true, word_start_mix: false, numbers: false, symbols: false, separator: ' ' },
-                    usernameOpts: { base_name: '', digit_count: 3, placement: 'end' },
+                    usernameOpts: { base_name: '', username_case: 'default', digit_count: 3, placement: 'end' },
                     strengthClasses: {
                         0: 'bg-red-600',
                         1: 'bg-orange-500',
@@ -268,6 +276,7 @@ $router->add('GET', '', function() use ($translator) {
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify(payload)
                             });
+                            if (!res.ok) throw new Error();
                             const data = await res.json();
                             this.output = data.result;
                             this.strength = data.strength ?? 0;
@@ -277,7 +286,38 @@ $router->add('GET', '', function() use ($translator) {
                     },
                     copyToClipboard() {
                         if (!this.output) return;
-                        navigator.clipboard.writeText(this.output);
+                        
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(this.output).then(() => {
+                                this.fireCopiedState();
+                            }).catch(() => {
+                                this.fallbackCopyToClipboard();
+                            });
+                        } else {
+                            this.fallbackCopyToClipboard();
+                        }
+                    },
+                    fallbackCopyToClipboard() {
+                        try {
+                            const textArea = document.createElement("textarea");
+                            textArea.value = this.output;
+                            textArea.style.top = "0";
+                            textArea.style.left = "0";
+                            textArea.style.position = "fixed";
+                            textArea.style.opacity = "0";
+                            document.body.appendChild(textArea);
+                            textArea.focus();
+                            textArea.select();
+                            const successful = document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            if (successful) {
+                                this.fireCopiedState();
+                            }
+                        } catch (err) {
+                            console.error('Fallback copy failed', err);
+                        }
+                    },
+                    fireCopiedState() {
                         this.copied = true;
                         setTimeout(() => this.copied = false, 2000);
                     }
