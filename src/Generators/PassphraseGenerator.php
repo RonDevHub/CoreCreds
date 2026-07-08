@@ -1,11 +1,12 @@
 <?php
+
 namespace CoreCreds\Generators;
 
 use CoreCreds\Core\CSPRNG;
 
-class PassphraseGenerator 
+class PassphraseGenerator
 {
-    private static function countLines(string $filepath): int 
+    private static function countLines(string $filepath): int
     {
         if (!file_exists($filepath)) return 0;
         $lineCount = 0;
@@ -20,7 +21,7 @@ class PassphraseGenerator
         return $lineCount;
     }
 
-    private static function getRandomLine(string $filepath, int $totalLines): string 
+    private static function getRandomLine(string $filepath, int $totalLines): string
     {
         if ($totalLines <= 0) return '';
         $targetLine = CSPRNG::getInt(1, $totalLines);
@@ -38,12 +39,12 @@ class PassphraseGenerator
             }
             fclose($handle);
         }
-        
+
         $parts = preg_split('/\s+/', $lineText, 2);
         return isset($parts[1]) ? trim($parts[1]) : trim($lineText);
     }
 
-    public static function generate(array $options): array 
+    public static function generate(array $options): array
     {
         $wordCount = (int)($options['word_count'] ?? 5);
         if ($wordCount < 3) $wordCount = 3;
@@ -54,7 +55,7 @@ class PassphraseGenerator
         $files = [];
 
         if ($listOpt === 'dice-de' || $listOpt === 'mix') $files['dice-de'] = $baseDir . 'dice-de.txt';
-        if ($listOpt === 'dice-lat' || $listOpt === 'mix') $files['dice-lat'] = $baseDir . 'dice-lat.txt';
+        if ($listOpt === 'dice-la' || $listOpt === 'mix') $files['dice-la'] = $baseDir . 'dice-la.txt';
         if ($listOpt === 'eff' || $listOpt === 'mix') $files['eff'] = $baseDir . 'eff.txt';
 
         $fileCounts = [];
