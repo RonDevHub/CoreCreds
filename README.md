@@ -27,7 +27,7 @@ CoreCreds ist ein extrem leichtgewichtiger, datenschutzfreundlicher und hochsich
 
 ### Betrieb über Docker (Empfohlen)
 
-Das Repository verfügt über einen integrierten GitHub-Worker, der fertige Images nach `ghcr.io/rondevhub/corecreds:latest` schiebt.
+Das Repository verfügt über einen integrierten Woodpecker-Worker, der fertige Images nach `ghcr.io/rondevhub/corecreds:latest` schiebt.
 
 1. Erstelle eine `docker-compose.yml` wie im Repository angegeben.
 2. Platziere deine Wortlisten (`dice-de.txt`, `dice-la.txt`, `eff.txt`) im Ordner `./data/`.
