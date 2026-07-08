@@ -1,4 +1,7 @@
-# CoreCreds
+<h1 align="center">
+  <img src="https://commitcloud.net/repo-avatars/4eea19fff4dd54461fd32fb3e503e953af5780180414e629bb2213d26f2c11a0" height="85"><br>
+  CoreCreds
+</h1>
 
 <div align="center">
 
