@@ -8,6 +8,7 @@ class UsernameGenerator
     public static function generate(array $options): array 
     {
         $base = trim($options['base_name'] ?? '');
+        $caseOpt = $options['username_case'] ?? 'default';
         
         if (empty($base)) {
             $baseDir = __DIR__ . '/../../data/';
@@ -35,6 +36,12 @@ class UsernameGenerator
         }
 
         $base = preg_replace('/[^A-Za-z0-9]/', '', $base);
+
+        if ($caseOpt === 'upper') {
+            $base = ucfirst(strtolower($base));
+        } elseif ($caseOpt === 'lower') {
+            $base = strtolower($base);
+        }
 
         $digitCount = (int)($options['digit_count'] ?? 0);
         $placement = $options['placement'] ?? 'end';
