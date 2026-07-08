@@ -46,6 +46,7 @@ $router->add('GET', '', function() use ($translator) {
         <meta name="description" content="CoreCreds: Sicherer & lokaler Passwort-, Passphrase- und Benutzernamen-Generator. 100% Open Source, ohne Tracking und ohne Speicherung.">
         <meta name="keywords" content="sicheres passwort generieren, passphrase generator deutsch, online passwort generator, username generator, diceware generator, corecreds, rondevhub">
         <meta name="author" content="Ronny Melzer (rondevhub)">
+        <link rel="icon" type="image/png" href="assets/icon/CoreCreds.png">
         <title><?php echo $lang['title']; ?></title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
