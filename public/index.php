@@ -177,8 +177,8 @@ $router->add('GET', '', function () use ($translator) {
                             <div>
                                 <label class="block text-xs sm:text-sm font-bold mb-2"><?php echo $lang['separator']; ?></label>
                                 <select x-model="passphraseOpts.separator" class="w-full p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 text-sm sm:text-base focus:outline-none focus:border-blue-600 transition">
-                                    <option value=" ">Leerschritt ( )</option>
                                     <option value="-">Bindestrich (-)</option>
+                                    <option value=" ">Leerschritt ( )</option>
                                     <option value="_">Unterstrich (_)</option>
                                     <option value="@">Ät (@)</option>
                                     <option value=".">Punkt (.)</option>
@@ -252,6 +252,7 @@ $router->add('GET', '', function () use ($translator) {
             <div class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-2xl max-w-md w-full p-4 sm:p-6 border border-slate-100 dark:border-slate-700" @click.away="showDonate = false">
                 <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3"><?php echo $lang['donate_modal_title']; ?></h3>
                 <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed"><?php echo $lang['donate_modal_text']; ?></p>
+                <p class="p-5 font-bold text-lg text-center text-amber-400"><a href="https://rondev.de/donate" target="_blank" rel="nofollow">Donate</a></p>
                 <div class="flex space-x-3">
                     <button @click="showDonate = false" class="flex-1 py-2.5 sm:py-3 bg-slate-100 dark:bg-slate-700 text-sm font-semibold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-600 transition"><?php echo $lang['close']; ?></button>
                 </div>
