@@ -49,103 +49,103 @@ $router->add('GET', '', function() use ($translator) {
     </head>
     <body class="h-full bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-200" x-data="appData">
         
-        <div class="max-w-4xl mx-auto px-4 py-8" x-init="initTimer()">
-            <header class="flex justify-between items-center mb-8 border-b border-slate-200 dark:border-slate-700 pb-4">
-                <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">CoreCreds</h1>
-                <div class="flex items-center space-x-4">
-                    <button @click="showDonate = true" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow font-medium transition"><?php echo $lang['donate']; ?></button>
-                    <a href="https://github.com/rondevhub/corecreds" target="_blank" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded-lg shadow font-medium transition"><?php echo $lang['repo']; ?></a>
+        <div class="max-w-4xl mx-auto px-4 py-4 sm:py-8" x-init="initTimer()">
+            <header class="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8 border-b border-slate-200 dark:border-slate-700 pb-4 space-y-4 sm:space-y-0">
+                <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">CoreCreds</h1>
+                <div class="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto justify-center sm:justify-end">
+                    <button @click="showDonate = true" class="flex-1 sm:flex-none text-center px-3 sm:px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow text-xs sm:text-sm font-medium transition"><?php echo $lang['donate']; ?></button>
+                    <a href="https://github.com/rondevhub/corecreds" target="_blank" class="flex-1 sm:flex-none text-center px-3 sm:px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded-lg shadow text-xs sm:text-sm font-medium transition"><?php echo $lang['repo']; ?></a>
                 </div>
             </header>
 
-            <main class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="md:col-span-2 space-y-6">
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-1 flex space-x-1">
-                        <button @click="tab = 'password'" :class="tab === 'password' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'" class="flex-1 py-3 text-center rounded-xl font-semibold transition"><?php echo $lang['tab_passwords']; ?></button>
-                        <button @click="tab = 'passphrase'" :class="tab === 'passphrase' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'" class="flex-1 py-3 text-center rounded-xl font-semibold transition"><?php echo $lang['tab_passphrases']; ?></button>
-                        <button @click="tab = 'username'" :class="tab === 'username' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'" class="flex-1 py-3 text-center rounded-xl font-semibold transition"><?php echo $lang['tab_usernames']; ?></button>
+            <main class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="md:col-span-2 space-y-4 sm:space-y-6">
+                    <div class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-xl p-1 flex space-x-1 overflow-x-auto no-scrollbar">
+                        <button @click="tab = 'password'" :class="tab === 'password' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'" class="flex-1 py-2 sm:py-3 text-center rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-semibold transition whitespace-nowrap px-2"><?php echo $lang['tab_passwords']; ?></button>
+                        <button @click="tab = 'passphrase'" :class="tab === 'passphrase' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'" class="flex-1 py-2 sm:py-3 text-center rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-semibold transition whitespace-nowrap px-2"><?php echo $lang['tab_passphrases']; ?></button>
+                        <button @click="tab = 'username'" :class="tab === 'username' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700'" class="flex-1 py-2 sm:py-3 text-center rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-semibold transition whitespace-nowrap px-2"><?php echo $lang['tab_usernames']; ?></button>
                     </div>
 
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 min-h-[100px] flex flex-col justify-center items-center relative group border border-slate-100 dark:border-slate-700">
-                        <div x-text="output || '...'" class="text-2xl font-mono tracking-wider text-center select-all break-all pr-12 font-bold text-slate-800 dark:text-white"></div>
-                        <button x-show="output" @click="copyToClipboard()" class="absolute right-4 p-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-xl transition shadow-sm">
-                            <svg x-show="!copied" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-                            <span x-show="copied" class="text-sm font-bold text-green-600 dark:text-green-400"><?php echo $lang['copied']; ?></span>
+                    <div class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 min-h-[80px] sm:min-h-[100px] flex flex-col justify-center items-center relative group border border-slate-100 dark:border-slate-700">
+                        <div x-text="output || '...'" class="text-lg sm:text-2xl font-mono tracking-wider text-center select-all break-all pr-10 sm:pr-12 font-bold text-slate-800 dark:text-white w-full"></div>
+                        <button x-show="output" @click="copyToClipboard()" class="absolute right-2 sm:right-4 p-1.5 sm:p-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg sm:rounded-xl transition shadow-sm">
+                            <svg x-show="!copied" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                            <span x-show="copied" class="text-xs sm:text-sm font-bold text-green-600 dark:text-green-400"><?php echo $lang['copied']; ?></span>
                         </button>
                     </div>
 
-                    <div x-show="tab === 'password' || tab === 'passphrase'" class="w-full h-3 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden transition-all duration-300">
+                    <div x-show="tab === 'password' || tab === 'passphrase'" class="w-full h-2.5 sm:h-3 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden transition-all duration-300">
                         <div :class="strengthClasses[strength]" class="h-full transition-all duration-500" :style="`width: ${(strength + 1) * 20}%`"></div>
                     </div>
-                    <div x-show="tab === 'password' || tab === 'passphrase'" class="text-right text-sm font-semibold -mt-4 text-slate-500">
+                    <div x-show="tab === 'password' || tab === 'passphrase'" class="text-right text-xs sm:text-sm font-semibold -mt-3 sm:-mt-4 text-slate-500">
                         <span x-text="strengthText[strength]"></span>
                     </div>
 
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 border border-slate-100 dark:border-slate-700">
-                        <div x-show="tab === 'password'" class="space-y-6">
+                    <div class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 border border-slate-100 dark:border-slate-700">
+                        <div x-show="tab === 'password'" class="space-y-4 sm:space-y-6">
                             <div>
-                                <label class="block text-sm font-bold mb-2"><?php echo $lang['len']; ?>: <span x-text="passwordOpts.length" class="text-blue-600"></span></label>
+                                <label class="block text-xs sm:text-sm font-bold mb-2"><?php echo $lang['len']; ?>: <span x-text="passwordOpts.length" class="text-blue-600"></span></label>
                                 <input type="range" min="8" max="64" x-model="passwordOpts.length" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600">
                             </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <label class="flex items-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
-                                    <input type="checkbox" x-model="passwordOpts.uppercase" class="w-5 h-5 text-blue-600 rounded accent-blue-600 mr-3">
-                                    <span class="font-medium"><?php echo $lang['uppercase']; ?></span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                                <label class="flex items-center p-3 sm:p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
+                                    <input type="checkbox" x-model="passwordOpts.uppercase" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 rounded accent-blue-600 mr-3">
+                                    <span class="text-sm sm:text-base font-medium"><?php echo $lang['uppercase']; ?></span>
                                 </label>
-                                <label class="flex items-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
-                                    <input type="checkbox" x-model="passwordOpts.lowercase" class="w-5 h-5 text-blue-600 rounded accent-blue-600 mr-3">
-                                    <span class="font-medium"><?php echo $lang['lowercase']; ?></span>
+                                <label class="flex items-center p-3 sm:p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
+                                    <input type="checkbox" x-model="passwordOpts.lowercase" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 rounded accent-blue-600 mr-3">
+                                    <span class="text-sm sm:text-base font-medium"><?php echo $lang['lowercase']; ?></span>
                                 </label>
-                                <label class="flex items-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
-                                    <input type="checkbox" x-model="passwordOpts.numbers" class="w-5 h-5 text-blue-600 rounded accent-blue-600 mr-3">
-                                    <span class="font-medium"><?php echo $lang['numbers']; ?></span>
+                                <label class="flex items-center p-3 sm:p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
+                                    <input type="checkbox" x-model="passwordOpts.numbers" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 rounded accent-blue-600 mr-3">
+                                    <span class="text-sm sm:text-base font-medium"><?php echo $lang['numbers']; ?></span>
                                 </label>
-                                <label class="flex items-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
-                                    <input type="checkbox" x-model="passwordOpts.symbols" class="w-5 h-5 text-blue-600 rounded accent-blue-600 mr-3">
-                                    <span class="font-medium"><?php echo $lang['symbols']; ?></span>
+                                <label class="flex items-center p-3 sm:p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
+                                    <input type="checkbox" x-model="passwordOpts.symbols" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 rounded accent-blue-600 mr-3">
+                                    <span class="text-sm sm:text-base font-medium"><?php echo $lang['symbols']; ?></span>
                                 </label>
                             </div>
-                            <label class="flex items-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
-                                <input type="checkbox" x-model="passwordOpts.exclude_similar" class="w-5 h-5 text-blue-600 rounded accent-blue-600 mr-3">
-                                <span class="font-medium"><?php echo $lang['exclude_similar']; ?></span>
+                            <label class="flex items-center p-3 sm:p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
+                                <input type="checkbox" x-model="passwordOpts.exclude_similar" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 rounded accent-blue-600 mr-3">
+                                <span class="text-sm sm:text-base font-medium"><?php echo $lang['exclude_similar']; ?></span>
                             </label>
                         </div>
 
-                        <div x-show="tab === 'passphrase'" class="space-y-6">
+                        <div x-show="tab === 'passphrase'" class="space-y-4 sm:space-y-6">
                             <div>
-                                <label class="block text-sm font-bold mb-2"><?php echo $lang['word_count']; ?>: <span x-text="passphraseOpts.word_count" class="text-blue-600"></span></label>
+                                <label class="block text-xs sm:text-sm font-bold mb-2"><?php echo $lang['word_count']; ?>: <span x-text="passphraseOpts.word_count" class="text-blue-600"></span></label>
                                 <input type="range" min="3" max="12" x-model="passphraseOpts.word_count" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600">
                             </div>
                             <div>
-                                <label class="block text-sm font-bold mb-2"><?php echo $lang['wordlist']; ?></label>
-                                <select x-model="passphraseOpts.wordlist" class="w-full p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 focus:outline-none focus:border-blue-600 transition">
+                                <label class="block text-xs sm:text-sm font-bold mb-2"><?php echo $lang['wordlist']; ?></label>
+                                <select x-model="passphraseOpts.wordlist" class="w-full p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 text-sm sm:text-base focus:outline-none focus:border-blue-600 transition">
                                     <option value="mix"><?php echo $lang['wordlist_mix']; ?></option>
                                     <option value="dice-de">dice-de.txt</option>
                                     <option value="dice-lat">dice-lat.txt</option>
                                     <option value="eff">eff.txt</option>
                                 </select>
                             </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <label class="flex items-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
-                                    <input type="checkbox" x-model="passphraseOpts.word_start_upper" @change="if(passphraseOpts.word_start_upper) passphraseOpts.word_start_mix=false" class="w-5 h-5 text-blue-600 rounded accent-blue-600 mr-3">
-                                    <span class="font-medium"><?php echo $lang['word_start_upper']; ?></span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                                <label class="flex items-center p-3 sm:p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
+                                    <input type="checkbox" x-model="passphraseOpts.word_start_upper" @change="if(passphraseOpts.word_start_upper) passphraseOpts.word_start_mix=false" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 rounded accent-blue-600 mr-3">
+                                    <span class="text-sm sm:text-base font-medium"><?php echo $lang['word_start_upper']; ?></span>
                                 </label>
-                                <label class="flex items-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
-                                    <input type="checkbox" x-model="passphraseOpts.word_start_mix" @change="if(passphraseOpts.word_start_mix) passphraseOpts.word_start_upper=false" class="w-5 h-5 text-blue-600 rounded accent-blue-600 mr-3">
-                                    <span class="font-medium"><?php echo $lang['word_start_mix']; ?></span>
+                                <label class="flex items-center p-3 sm:p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
+                                    <input type="checkbox" x-model="passphraseOpts.word_start_mix" @change="if(passphraseOpts.word_start_mix) passphraseOpts.word_start_upper=false" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 rounded accent-blue-600 mr-3">
+                                    <span class="text-sm sm:text-base font-medium"><?php echo $lang['word_start_mix']; ?></span>
                                 </label>
-                                <label class="flex items-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
-                                    <input type="checkbox" x-model="passphraseOpts.numbers" class="w-5 h-5 text-blue-600 rounded accent-blue-600 mr-3">
-                                    <span class="font-medium"><?php echo $lang['numbers']; ?></span>
+                                <label class="flex items-center p-3 sm:p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
+                                    <input type="checkbox" x-model="passphraseOpts.numbers" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 rounded accent-blue-600 mr-3">
+                                    <span class="text-sm sm:text-base font-medium"><?php echo $lang['numbers']; ?></span>
                                 </label>
-                                <label class="flex items-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
-                                    <input type="checkbox" x-model="passphraseOpts.symbols" class="w-5 h-5 text-blue-600 rounded accent-blue-600 mr-3">
-                                    <span class="font-medium"><?php echo $lang['symbols']; ?></span>
+                                <label class="flex items-center p-3 sm:p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl cursor-pointer select-none border border-transparent has-[:checked]:border-blue-600 transition">
+                                    <input type="checkbox" x-model="passphraseOpts.symbols" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 rounded accent-blue-600 mr-3">
+                                    <span class="text-sm sm:text-base font-medium"><?php echo $lang['symbols']; ?></span>
                                 </label>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold mb-2"><?php echo $lang['separator']; ?></label>
-                                <select x-model="passphraseOpts.separator" class="w-full p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 focus:outline-none focus:border-blue-600 transition">
+                                <label class="block text-xs sm:text-sm font-bold mb-2"><?php echo $lang['separator']; ?></label>
+                                <select x-model="passphraseOpts.separator" class="w-full p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 text-sm sm:text-base focus:outline-none focus:border-blue-600 transition">
                                     <option value=" ">Leerschritt ( )</option>
                                     <option value="-">Bindestrich (-)</option>
                                     <option value="_">Unterstrich (_)</option>
@@ -155,26 +155,26 @@ $router->add('GET', '', function() use ($translator) {
                             </div>
                         </div>
 
-                        <div x-show="tab === 'username'" class="space-y-6">
+                        <div x-show="tab === 'username'" class="space-y-4 sm:space-y-6">
                             <div>
-                                <label class="block text-sm font-bold mb-2"><?php echo $lang['base_name']; ?></label>
-                                <input type="text" x-model="usernameOpts.base_name" class="w-full p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 focus:outline-none focus:border-blue-600 transition" placeholder="z.B. Rocky">
+                                <label class="block text-xs sm:text-sm font-bold mb-2"><?php echo $lang['base_name']; ?></label>
+                                <input type="text" x-model="usernameOpts.base_name" class="w-full p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 text-sm sm:text-base focus:outline-none focus:border-blue-600 transition" placeholder="z.B. Rocky">
                             </div>
                             <div>
-                                <label class="block text-sm font-bold mb-2"><?php echo $lang['username_case']; ?></label>
-                                <select x-model="usernameOpts.username_case" class="w-full p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 focus:outline-none focus:border-blue-600 transition">
+                                <label class="block text-xs sm:text-sm font-bold mb-2"><?php echo $lang['username_case']; ?></label>
+                                <select x-model="usernameOpts.username_case" class="w-full p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 text-sm sm:text-base focus:outline-none focus:border-blue-600 transition">
                                     <option value="default"><?php echo $lang['case_default']; ?></option>
                                     <option value="upper"><?php echo $lang['case_upper']; ?></option>
                                     <option value="lower"><?php echo $lang['case_lower']; ?></option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold mb-2"><?php echo $lang['digit_count']; ?>: <span x-text="usernameOpts.digit_count" class="text-blue-600"></span></label>
+                                <label class="block text-xs sm:text-sm font-bold mb-2"><?php echo $lang['digit_count']; ?>: <span x-text="usernameOpts.digit_count" class="text-blue-600"></span></label>
                                 <input type="range" min="0" max="8" x-model="usernameOpts.digit_count" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-600">
                             </div>
                             <div>
-                                <label class="block text-sm font-bold mb-2"><?php echo $lang['placement']; ?></label>
-                                <select x-model="usernameOpts.placement" class="w-full p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 focus:outline-none focus:border-blue-600 transition">
+                                <label class="block text-xs sm:text-sm font-bold mb-2"><?php echo $lang['placement']; ?></label>
+                                <select x-model="usernameOpts.placement" class="w-full p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 text-sm sm:text-base focus:outline-none focus:border-blue-600 transition">
                                     <option value="end"><?php echo $lang['place_end']; ?></option>
                                     <option value="start"><?php echo $lang['place_start']; ?></option>
                                     <option value="random"><?php echo $lang['place_random']; ?></option>
@@ -182,42 +182,42 @@ $router->add('GET', '', function() use ($translator) {
                             </div>
                         </div>
 
-                        <button @click="generate()" class="w-full mt-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-bold shadow-lg shadow-blue-500/20 active:scale-[0.98] transition">
+                        <button @click="generate()" class="w-full mt-4 sm:mt-6 py-3.5 sm:py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-bold shadow-lg shadow-blue-500/20 text-sm sm:text-base active:scale-[0.98] transition">
                             <?php echo $lang['generate']; ?>
                         </button>
                     </div>
                 </div>
 
-                <div class="space-y-6">
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 border border-slate-100 dark:border-slate-700">
-                        <h3 class="text-lg font-bold mb-3 text-blue-600 flex items-center">
+                <div class="space-y-4 sm:space-y-6">
+                    <div class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 border border-slate-100 dark:border-slate-700">
+                        <h3 class="text-base sm:text-lg font-bold mb-2 sm:mb-3 text-blue-600 flex items-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             <?php echo $lang['desc_title']; ?>
                         </h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"><?php echo $lang['desc_text']; ?></p>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed"><?php echo $lang['desc_text']; ?></p>
                     </div>
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 border border-slate-100 dark:border-slate-700">
-                        <h3 class="text-lg font-bold mb-3 text-indigo-600 flex items-center">
+                    <div class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 border border-slate-100 dark:border-slate-700">
+                        <h3 class="text-base sm:text-lg font-bold mb-2 sm:mb-3 text-indigo-600 flex items-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                             <?php echo $lang['sec_title']; ?>
                         </h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed"><?php echo $lang['sec_text']; ?></p>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed"><?php echo $lang['sec_text']; ?></p>
                     </div>
                 </div>
             </main>
         </div>
 
         <div x-show="showDonate" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" x-transition>
-            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-md w-full p-6 border border-slate-100 dark:border-slate-700" @click.away="showDonate = false">
-                <h3 class="text-xl font-bold mb-3"><?php echo $lang['donate_modal_title']; ?></h3>
-                <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 leading-relaxed"><?php echo $lang['donate_modal_text']; ?></p>
+            <div class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-2xl max-w-md w-full p-4 sm:p-6 border border-slate-100 dark:border-slate-700" @click.away="showDonate = false">
+                <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3"><?php echo $lang['donate_modal_title']; ?></h3>
+                <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed"><?php echo $lang['donate_modal_text']; ?></p>
                 <div class="flex space-x-3">
-                    <button @click="showDonate = false" class="flex-1 py-3 bg-slate-100 dark:bg-slate-700 font-semibold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-600 transition"><?php echo $lang['close']; ?></button>
+                    <button @click="showDonate = false" class="flex-1 py-2.5 sm:py-3 bg-slate-100 dark:bg-slate-700 text-sm font-semibold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-600 transition"><?php echo $lang['close']; ?></button>
                 </div>
             </div>
         </div>
 
-        <div x-show="timeoutWarning" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-red-600 text-white font-bold px-6 py-3 rounded-xl shadow-2xl transition" x-transition>
+        <div x-show="timeoutWarning" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-red-600 text-white text-sm sm:text-base font-bold px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl shadow-2xl transition" x-transition>
             Inaktivität erkannt! Cache & Speicher werden geleert...
         </div>
 
