@@ -14,7 +14,7 @@ class PasswordGenerator
         $upper = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
         $lower = 'abcdefghijkmnopqrstuvwxyz';
         $nums = '123456789';
-        $syms = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+        $syms = '!@#$%^&*()_+-=[]{};:,.<>?';
 
         if (!isset($options['exclude_similar']) || !$options['exclude_similar']) {
             $upper .= 'I';
