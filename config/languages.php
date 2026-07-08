@@ -40,7 +40,7 @@ return [
         'copied' => 'Kopiert!',
         'repo' => 'Quellcode',
         'donate' => 'Spenden',
-        'donate_modal_title' => 'Unterstütze CoreCreds',
+        'donate_modal_title' => 'Unterstütze CoreCreds mit einem ☕️',
         'donate_modal_text' => 'Wenn dir dieses datenschutzfreundliche Open-Source-Tool gefällt, freue ich mich über eine kleine Spende zur Deckung der Serverkosten.',
         'close' => 'Schließen'
     ],
@@ -84,7 +84,7 @@ return [
         'copied' => 'Copied!',
         'repo' => 'Repository',
         'donate' => 'Donate',
-        'donate_modal_title' => 'Support CoreCreds',
+        'donate_modal_title' => 'Support CoreCreds with a ☕️',
         'donate_modal_text' => 'If you like this privacy-friendly open-source tool, I would appreciate a small donation to help cover server costs.',
         'close' => 'Close'
     ]
