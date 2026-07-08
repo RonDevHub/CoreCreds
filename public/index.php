@@ -19,7 +19,7 @@ use CoreCreds\Generators\UsernameGenerator;
 $translator = new Translator();
 $router = new Router();
 
-$router->add('POST', '/api/generate', function() {
+$router->add('POST', '/api/generate', function () {
     header('Content-Type: application/json');
     $input = json_decode(file_get_contents('php://input'), true) ?? [];
     $type = $input['type'] ?? 'password';
@@ -35,11 +35,12 @@ $router->add('POST', '/api/generate', function() {
     }
 });
 
-$router->add('GET', '', function() use ($translator) {
+$router->add('GET', '', function () use ($translator) {
     $lang = $translator->getAll();
-    ?>
+?>
     <!DOCTYPE html>
     <html lang="<?php echo $translator->getLanguage(); ?>" class="h-full">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,8 +52,9 @@ $router->add('GET', '', function() use ($translator) {
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
+
     <body class="h-full bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-200" x-data="appData">
-        
+
         <div class="max-w-4xl mx-auto px-4 py-4 sm:py-8" x-init="initTimer()">
             <header class="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8 border-b border-slate-200 dark:border-slate-700 pb-4 space-y-4 sm:space-y-0">
                 <div class="flex items-center space-x-3">
@@ -78,7 +80,9 @@ $router->add('GET', '', function() use ($translator) {
                     <div class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 min-h-[80px] sm:min-h-[100px] flex flex-col justify-center items-center relative group border border-slate-100 dark:border-slate-700">
                         <div x-text="output || '...'" class="text-lg sm:text-2xl font-mono tracking-wider text-center select-all break-all pr-10 sm:pr-12 font-bold text-slate-800 dark:text-white w-full"></div>
                         <button x-show="output" @click="copyToClipboard()" class="absolute right-2 sm:right-4 p-1.5 sm:p-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg sm:rounded-xl transition shadow-sm">
-                            <svg x-show="!copied" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                            <svg x-show="!copied" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                            </svg>
                             <span x-show="copied" class="text-xs sm:text-sm font-bold text-green-600 dark:text-green-400"><?php echo $lang['copied']; ?></span>
                         </button>
                     </div>
@@ -200,20 +204,29 @@ $router->add('GET', '', function() use ($translator) {
                 <div class="space-y-4 sm:space-y-6">
                     <div class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 border border-slate-100 dark:border-slate-700">
                         <h3 class="text-base sm:text-lg font-bold mb-2 sm:mb-3 text-blue-600 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
                             <?php echo $lang['desc_title']; ?>
                         </h3>
                         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed"><?php echo $lang['desc_text']; ?></p>
                     </div>
                     <div class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 border border-slate-100 dark:border-slate-700">
                         <h3 class="text-base sm:text-lg font-bold mb-2 sm:mb-3 text-indigo-600 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
                             <?php echo $lang['sec_title']; ?>
                         </h3>
                         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed"><?php echo $lang['sec_text']; ?></p>
                     </div>
                 </div>
             </main>
+            <footer class="relative z-10 w-full p-6 text-center text-xs opacity-60 flex flex-wrap justify-center gap-x-6 gap-y-3">
+                <div class="w-full text-center mt-2">
+                    <span class="tsm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed shadow-2xl">Erstellt mit ❤️ und ☕️ von <a href="https://rondev.de" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-slate-300 hover:underline font-bold">RonDev</a> - <a href="https://github.com/RonDevHub/CoreCreds" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-slate-300 hover:underline font-bold">Github</a></span>
+                </div>
+            </footer>
         </div>
 
         <div x-show="showDonate" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" x-transition>
@@ -240,9 +253,29 @@ $router->add('GET', '', function() use ($translator) {
                     showDonate: false,
                     timeoutWarning: false,
                     timer: null,
-                    passwordOpts: { length: 16, uppercase: true, lowercase: true, numbers: true, symbols: true, exclude_similar: false },
-                    passphraseOpts: { word_count: 5, wordlist: 'mix', word_start_upper: true, word_start_mix: false, numbers: false, symbols: false, separator: ' ' },
-                    usernameOpts: { base_name: '', username_case: 'default', digit_count: 3, placement: 'end' },
+                    passwordOpts: {
+                        length: 16,
+                        uppercase: true,
+                        lowercase: true,
+                        numbers: true,
+                        symbols: true,
+                        exclude_similar: false
+                    },
+                    passphraseOpts: {
+                        word_count: 5,
+                        wordlist: 'mix',
+                        word_start_upper: true,
+                        word_start_mix: false,
+                        numbers: false,
+                        symbols: false,
+                        separator: ' '
+                    },
+                    usernameOpts: {
+                        base_name: '',
+                        username_case: 'default',
+                        digit_count: 3,
+                        placement: 'end'
+                    },
                     strengthClasses: {
                         0: 'bg-red-600',
                         1: 'bg-orange-500',
@@ -274,15 +307,28 @@ $router->add('GET', '', function() use ($translator) {
                         this.generate();
                     },
                     async generate() {
-                        let payload = { type: this.tab };
-                        if (this.tab === 'password') payload = { ...payload, ...this.passwordOpts };
-                        if (this.tab === 'passphrase') payload = { ...payload, ...this.passphraseOpts };
-                        if (this.tab === 'username') payload = { ...payload, ...this.usernameOpts };
+                        let payload = {
+                            type: this.tab
+                        };
+                        if (this.tab === 'password') payload = {
+                            ...payload,
+                            ...this.passwordOpts
+                        };
+                        if (this.tab === 'passphrase') payload = {
+                            ...payload,
+                            ...this.passphraseOpts
+                        };
+                        if (this.tab === 'username') payload = {
+                            ...payload,
+                            ...this.usernameOpts
+                        };
 
                         try {
                             const res = await fetch('/api/generate', {
                                 method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
                                 body: JSON.stringify(payload)
                             });
                             if (!res.ok) throw new Error();
@@ -295,7 +341,7 @@ $router->add('GET', '', function() use ($translator) {
                     },
                     copyToClipboard() {
                         if (!this.output) return;
-                        
+
                         if (navigator.clipboard && navigator.clipboard.writeText) {
                             navigator.clipboard.writeText(this.output).then(() => {
                                 this.fireCopiedState();
@@ -334,8 +380,9 @@ $router->add('GET', '', function() use ($translator) {
             });
         </script>
     </body>
+
     </html>
-    <?php
+<?php
 });
 
 $router->handle();
