@@ -1,7 +1,7 @@
 <?php
 return [
     'de' => [
-        'title' => 'CoreCreds — Sicherer credential Generator',
+        'title' => 'CoreCreds — Sicherer Credential Generator',
         'desc_title' => 'Was macht ein Passwort sicher?',
         'desc_text' => 'Ein sicheres Passwort zeichnet sich durch hohe Entropie aus. Es sollte lang sein und keine vorhersehbaren Muster aufweisen. Passphrasen (Kombinationen aus zufälligen Wörtern) bieten exzellenten Schutz, da sie für Menschen merkbar, für Computer durch die schiere Zeichenlänge jedoch unknackbar sind.',
         'sec_title' => 'Warum ist CoreCreds sicher?',
@@ -27,6 +27,10 @@ return [
         'place_start' => 'Am Anfang',
         'place_end' => 'Am Ende',
         'place_random' => 'Im Namen verstreut',
+        'username_case' => 'Schreibweise Name',
+        'case_default' => 'Original aus Liste',
+        'case_upper' => 'Erster Buchstabe Groß',
+        'case_lower' => 'Alles Klein',
         'generate' => 'Generieren',
         'strength_0' => 'Sehr unsicher',
         'strength_1' => 'Unsicher',
@@ -36,7 +40,7 @@ return [
         'copied' => 'Kopiert!',
         'repo' => 'Quellcode',
         'donate' => 'Spenden',
-        'donate_modal_title' => 'Unterstütze CoreCreds',
+        'donate_modal_title' => 'Unterstütze CoreCreds mit einem ☕️',
         'donate_modal_text' => 'Wenn dir dieses datenschutzfreundliche Open-Source-Tool gefällt, freue ich mich über eine kleine Spende zur Deckung der Serverkosten.',
         'close' => 'Schließen'
     ],
@@ -67,6 +71,10 @@ return [
         'place_start' => 'At the beginning',
         'place_end' => 'At the end',
         'place_random' => 'Scattered in name',
+        'username_case' => 'Name Casing',
+        'case_default' => 'Original from List',
+        'case_upper' => 'First Letter Capital',
+        'case_lower' => 'All Lowercase',
         'generate' => 'Generate',
         'strength_0' => 'Very weak',
         'strength_1' => 'Weak',
@@ -76,7 +84,7 @@ return [
         'copied' => 'Copied!',
         'repo' => 'Repository',
         'donate' => 'Donate',
-        'donate_modal_title' => 'Support CoreCreds',
+        'donate_modal_title' => 'Support CoreCreds with a ☕️',
         'donate_modal_text' => 'If you like this privacy-friendly open-source tool, I would appreciate a small donation to help cover server costs.',
         'close' => 'Close'
     ]
