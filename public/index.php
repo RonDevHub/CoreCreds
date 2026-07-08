@@ -55,7 +55,12 @@ $router->add('GET', '', function() use ($translator) {
         
         <div class="max-w-4xl mx-auto px-4 py-4 sm:py-8" x-init="initTimer()">
             <header class="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8 border-b border-slate-200 dark:border-slate-700 pb-4 space-y-4 sm:space-y-0">
-                <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">CoreCreds</h1>
+                <div class="flex items-center space-x-3">
+                    <img src="assets/icon/CoreCreds.png" alt="CoreCreds Logo" class="h-12 sm:h-16 w-auto object-contain">
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                        CoreCreds
+                    </h1>
+                </div>
                 <div class="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto justify-center sm:justify-end">
                     <button @click="showDonate = true" class="flex-1 sm:flex-none text-center px-3 sm:px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow text-xs sm:text-sm font-medium transition"><?php echo $lang['donate']; ?></button>
                     <a href="https://github.com/rondevhub/corecreds" target="_blank" class="flex-1 sm:flex-none text-center px-3 sm:px-4 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded-lg shadow text-xs sm:text-sm font-medium transition"><?php echo $lang['repo']; ?></a>
