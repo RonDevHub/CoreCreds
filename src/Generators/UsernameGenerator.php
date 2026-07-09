@@ -12,7 +12,7 @@ class UsernameGenerator
         
         if (empty($base)) {
             $baseDir = __DIR__ . '/../../data/';
-            $candidateFiles = ['dice-de.txt', 'dice-lat.txt', 'eff.txt'];
+            $candidateFiles = ['dice-de.txt', 'dice-la.txt', 'eff.txt'];
             $validFiles = [];
             foreach ($candidateFiles as $cf) {
                 if (file_exists($baseDir . $cf)) {
