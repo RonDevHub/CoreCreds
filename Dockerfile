@@ -1,3 +1,13 @@
+LABEL \
+    org.opencontainers.image.title="CoreCreds" \
+    org.opencontainers.image.description="CoreCreds ist ein extrem leichtgewichtiger, datenschutzfreundlicher und hochsicherer Generator für Passwörter, Passphrasen und Benutzernamen." \
+    org.opencontainers.image.url="https://github.com/RonDevHub/CoreCreds" \
+    org.opencontainers.image.source="https://commitcloud.net/RonDevHub/CoreCreds" \
+    org.opencontainers.image.documentation="https://github.com/RonDevHub/CoreCreds" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.created="2026-07-07T22:00:00.000Z" \
+    org.opencontainers.image.authors="RonDevHub <ron.dev@posteo.de>"
+
 FROM alpine:3.19
 
 RUN apk add --no-cache \
